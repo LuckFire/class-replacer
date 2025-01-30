@@ -16,8 +16,6 @@ prog
             ignore !== undefined ? ignore.split(',') : [],
         );
 
-        console.log(files);
-
         for (const file of files) {
             const scss = readFile(file);
             const lines = scss.split('\n');
