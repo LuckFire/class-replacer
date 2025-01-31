@@ -17,9 +17,9 @@ prog
         );
 
         for (const file of files) {
-            const scss = readFile(file);
+            const css = readFile(file);
 
-            const updatedScss = replaceClasses(scss);
+            const updatedScss = replaceClasses(css);
             writeFile(file, updatedScss);
         }
     });

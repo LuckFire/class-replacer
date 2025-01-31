@@ -29,12 +29,12 @@ export function writeFile(path: string, data: string) {
     return writeFileSync(path, data, "utf8");
 }
 
-export function replaceClasses(scss: string) {
+export function replaceClasses(css: string) {
     const regex = new RegExp(/(?<class_name>(?<=\.)[A-Za-z0-9\-\_]+)/gm);
 
-    const matches = scss.matchAll(regex).toArray();
+    const matches = css.matchAll(regex).toArray();
 
-    if (!matches.length) return scss;
+    if (!matches.length) return css;
 
     for (const match of matches) {
         if (!match.groups) continue;
@@ -44,11 +44,11 @@ export function replaceClasses(scss: string) {
 
         if (!classes[className]) continue;
 
-        scss = scss.replace(
+        css = css.replace(
             new RegExp(`\\b${className}\\b`, 'g'),
             classes[className]
         );
     }
 
-    return scss;
+    return css;
 }
