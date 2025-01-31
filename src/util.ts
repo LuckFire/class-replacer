@@ -34,11 +34,10 @@ export function replaceClasses(lines: string[]) {
 
     for (let i = 0; i < lines.length; i++) {
         let line = lines[i];
-        const matches = [ ...line.matchAll(regex) ];
+        const matches = line.matchAll(regex).toArray();
 
-        if (!matches || !matches.length) continue;
+        if (!matches.length) continue;
 
-        let isMatching = false;
         for (const match of matches) {
             if (!match.groups) continue;
 
@@ -46,7 +45,6 @@ export function replaceClasses(lines: string[]) {
             const className = groups.class_name;
 
             if (!classes[className]) continue;
-            isMatching = true;
 
             line = line.replace(
                 new RegExp(`\\b${className}\\b`, 'g'),
@@ -54,7 +52,6 @@ export function replaceClasses(lines: string[]) {
             );
         }
 
-        if (!isMatching) continue;
         lines[i] = line;
     }
 
