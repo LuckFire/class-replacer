@@ -30,7 +30,7 @@ export function writeFile(path: string, data: string) {
 }
 
 export function replaceClasses(lines: string[]) {
-    const regex = new RegExp(/(?<class_name>(?<=\.)[A-Za-z0-9\-\_]+)/gm)
+    const regex = new RegExp(/(?<class_name>(?<=\.)[A-Za-z0-9\-\_]+)/gm);
 
     for (let i = 0; i < lines.length; i++) {
         let line = lines[i];
