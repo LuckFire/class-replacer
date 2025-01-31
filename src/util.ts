@@ -29,31 +29,26 @@ export function writeFile(path: string, data: string) {
     return writeFileSync(path, data, "utf8");
 }
 
-export function replaceClasses(lines: string[]) {
+export function replaceClasses(scss: string) {
     const regex = new RegExp(/(?<class_name>(?<=\.)[A-Za-z0-9\-\_]+)/gm);
 
-    for (let i = 0; i < lines.length; i++) {
-        let line = lines[i];
-        const matches = line.matchAll(regex).toArray();
+    const matches = scss.matchAll(regex).toArray();
 
-        if (!matches.length) continue;
+    if (!matches.length) return scss;
 
-        for (const match of matches) {
-            if (!match.groups) continue;
+    for (const match of matches) {
+        if (!match.groups) continue;
 
-            const groups = match.groups as { class_name: string };
-            const className = groups.class_name;
+        const groups = match.groups as { class_name: string };
+        const className = groups.class_name;
 
-            if (!classes[className]) continue;
+        if (!classes[className]) continue;
 
-            line = line.replace(
-                new RegExp(`\\b${className}\\b`, 'g'),
-                classes[className]
-            );
-        }
-
-        lines[i] = line;
+        scss = scss.replace(
+            new RegExp(`\\b${className}\\b`, 'g'),
+            classes[className]
+        );
     }
 
-    return lines;
+    return scss;
 }

@@ -18,10 +18,9 @@ prog
 
         for (const file of files) {
             const scss = readFile(file);
-            const lines = scss.split('\n');
 
-            const updatedScss = replaceClasses(lines);
-            writeFile(file, updatedScss.join('\n'));
+            const updatedScss = replaceClasses(scss);
+            writeFile(file, updatedScss);
         }
     });
 
